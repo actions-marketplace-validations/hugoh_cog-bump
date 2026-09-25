@@ -33,12 +33,17 @@ outputs:
       All tags cocogitto created (newline-separated), empty when none. A monorepo
       `cog bump --auto` can create several at once.
     value: ${{ steps.bump.outputs.tags }}
+  notes:
+    description: >-
+      `cog changelog --at <tag>` output for the first created tag, grouped by
+      conventional commit type. Empty when nothing was releasable.
+    value: ${{ steps.bump.outputs.notes }}
 runs:
   using: composite
   steps:
-    - uses: cocogitto/cocogitto-action@9a9fe03b31c47444290c0d7f9b1ee1b44ee13f20 # v4.1.0
+    - uses: cocogitto/cocogitto-action@52d0023b4396897f1815648e553db2ab8d782f3a # v4.2.0
       with:
-        command: "--version"
+        install-only: true
     - id: bump
       shell: bash
       env:
